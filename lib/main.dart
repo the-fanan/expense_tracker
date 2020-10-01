@@ -85,52 +85,51 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
       ),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Container(
-              width: double.infinity,
-              child: Card(
-                color: Color(0xFFFFC0CB),
-                child: Text("Chart!"),
-                elevation: 4,
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Container(
+                width: double.infinity,
+                child: Card(
+                  color: Color(0xFFFFC0CB),
+                  child: Text("Chart!"),
+                  elevation: 4,
+                ),
               ),
-            ),
-            Container(
-              width: double.infinity,
-              child: Card(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    TextField(
-                      decoration: InputDecoration(labelText: "Title"),
-                      controller: titleController, 
-                    ),
-                    TextField(
-                      decoration: InputDecoration(labelText: "Amount"),
-                      controller: amountController
-                    ),
-                    FlatButton(child: Text("Add Expense", style: TextStyle(color: Colors.white)), onPressed: addTransaction, padding: EdgeInsets.all(10),splashColor: Colors.pink,color: Colors.blue,),
-                  ]
-                )
+              Container(
+                width: double.infinity,
+                child: Card(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      TextField(
+                        decoration: InputDecoration(labelText: "Title"),
+                        controller: titleController, 
+                      ),
+                      TextField(
+                        decoration: InputDecoration(labelText: "Amount"),
+                        controller: amountController
+                      ),
+                      FlatButton(child: Text("Add Expense", style: TextStyle(color: Colors.white)), onPressed: addTransaction, padding: EdgeInsets.all(10),splashColor: Colors.pink,color: Colors.blue,),
+                    ]
+                  )
+                ),
               ),
-            ),
-           Container(
-             height: MediaQuery.of(context).size.height * 0.5,
-             child:  ListView(
-              scrollDirection: Axis.vertical,
-              children: <Widget>[
-                ...this.transactions.map((tx){
-                  return TransactionListItem(
-                    transaction: tx,
-                  );
-                })
-              ],
-            ),
-           )
-          ],
-        ),
+            Container(
+              height: MediaQuery.of(context).size.height * 0.7,
+              child:  ListView.builder(
+                scrollDirection: Axis.vertical,
+                itemCount: this.transactions.length,
+                itemBuilder: (context, i){
+                  return TransactionListItem(transaction: this.transactions[i]);
+                },
+              ),
+            )
+            ],
+          ),
+        )
       ),
     );
   }
