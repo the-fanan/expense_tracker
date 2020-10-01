@@ -63,18 +63,20 @@ class _MyHomePageState extends State<MyHomePage> {
     Transaction(id: 8, title: 'Bolt', amount: 7250.25, date: DateTime.now(),),
   ];
 
-  String titleInput;
-  String amountInput;
+  var titleController = TextEditingController() ;
+  var amountController = TextEditingController();
 
   void addTransaction() {
-    if (this.titleInput == null || this.amountInput == null || this.titleInput == "" || this.amountInput == "") {
+    if (this.titleController.text == null || this.amountController.text == null || this.titleController.text == "" || this.amountController.text == "") {
       return;
     }
-    var newTransaction = Transaction(id: this.transactions.length + 1, title: this.titleInput, amount: double.parse(this.amountInput), date: DateTime.now(),);
-    this.transactions.add(newTransaction);
+    var newTransaction = Transaction(id: this.transactions.length + 1, title: this.titleController.text, amount: double.parse(this.amountController.text), date: DateTime.now(),);
     //reset data
-    this.titleInput = null;
-    this.amountInput = null;
+    this.setState(() {
+      this.transactions.add(newTransaction);
+      this.titleController.clear();
+      this.amountController.clear();
+    });
   }
   @override
   Widget build(BuildContext context) {
@@ -102,18 +104,14 @@ class _MyHomePageState extends State<MyHomePage> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     TextField(
-                      decoration: InputDecoration(labelText: "Title"), 
-                      onChanged: (value){
-                        titleInput = value;
-                      }
+                      decoration: InputDecoration(labelText: "Title"),
+                      controller: titleController, 
                     ),
                     TextField(
                       decoration: InputDecoration(labelText: "Amount"),
-                      onChanged: (value){
-                        amountInput = value;
-                      }
+                      controller: amountController
                     ),
-                    FlatButton(child: Text("Add Expense", style: TextStyle(color: Colors.white)), onPressed: addTransaction,padding: EdgeInsets.all(10),splashColor: Colors.pink,color: Colors.blue,),
+                    FlatButton(child: Text("Add Expense", style: TextStyle(color: Colors.white)), onPressed: addTransaction, padding: EdgeInsets.all(10),splashColor: Colors.pink,color: Colors.blue,),
                   ]
                 )
               ),
