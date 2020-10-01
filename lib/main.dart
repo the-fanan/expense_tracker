@@ -55,6 +55,12 @@ class _MyHomePageState extends State<MyHomePage> {
   final List<Transaction> transactions = [
     Transaction(id: 1, title: 'The Place', amount: 1520.75, date: DateTime.now(),),
     Transaction(id: 2, title: 'Bolt', amount: 1250.25, date: DateTime.now(),),
+    Transaction(id: 3, title: 'Bolt', amount: 1150.25, date: DateTime.now(),),
+    Transaction(id: 4, title: 'Bolt', amount: 1350.25, date: DateTime.now(),),
+    Transaction(id: 5, title: 'Bolt', amount: 1050.25, date: DateTime.now(),),
+    Transaction(id: 6, title: 'Bolt', amount: 2250.25, date: DateTime.now(),),
+    Transaction(id: 7, title: 'Bolt', amount: 4250.25, date: DateTime.now(),),
+    Transaction(id: 8, title: 'Bolt', amount: 7250.25, date: DateTime.now(),),
   ];
   @override
   Widget build(BuildContext context) {
@@ -99,7 +105,10 @@ class _MyHomePageState extends State<MyHomePage> {
                 elevation: 4,
               ),
             ),
-            Column(
+           Container(
+             height: MediaQuery.of(context).size.height * 0.6,
+             child:  ListView(
+              scrollDirection: Axis.vertical,
               children: <Widget>[
                 ...this.transactions.map((tx){
                   return TransactionListItem(
@@ -108,6 +117,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 })
               ],
             ),
+           )
           ],
         ),
       ),
