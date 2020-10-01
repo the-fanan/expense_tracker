@@ -52,7 +52,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  final List<Transaction> transactions = [
+  List<Transaction> transactions = [
     Transaction(id: 1, title: 'The Place', amount: 1520.75, date: DateTime.now(),),
     Transaction(id: 2, title: 'Bolt', amount: 1250.25, date: DateTime.now(),),
     Transaction(id: 3, title: 'Bolt', amount: 1150.25, date: DateTime.now(),),
@@ -62,38 +62,28 @@ class _MyHomePageState extends State<MyHomePage> {
     Transaction(id: 7, title: 'Bolt', amount: 4250.25, date: DateTime.now(),),
     Transaction(id: 8, title: 'Bolt', amount: 7250.25, date: DateTime.now(),),
   ];
+
+  String titleInput;
+  String amountInput;
+
+  void addTransaction() {
+    if (this.titleInput == null || this.amountInput == null || this.titleInput == "" || this.amountInput == "") {
+      return;
+    }
+    var newTransaction = Transaction(id: this.transactions.length + 1, title: this.titleInput, amount: double.parse(this.amountInput), date: DateTime.now(),);
+    this.transactions.add(newTransaction);
+    //reset data
+    this.titleInput = null;
+    this.amountInput = null;
+  }
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
     return Scaffold(
       appBar: AppBar(
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
         title: Text(widget.title),
       ),
       body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
         child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Invoke "debug painting" (press "p" in the console, choose the
-          // "Toggle Debug Paint" action from the Flutter Inspector in Android
-          // Studio, or the "Toggle Debug Paint" command in Visual Studio Code)
-          // to see the wireframe for each widget.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
@@ -105,8 +95,31 @@ class _MyHomePageState extends State<MyHomePage> {
                 elevation: 4,
               ),
             ),
+            Container(
+              width: double.infinity,
+              child: Card(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    TextField(
+                      decoration: InputDecoration(labelText: "Title"), 
+                      onChanged: (value){
+                        titleInput = value;
+                      }
+                    ),
+                    TextField(
+                      decoration: InputDecoration(labelText: "Amount"),
+                      onChanged: (value){
+                        amountInput = value;
+                      }
+                    ),
+                    FlatButton(child: Text("Add Expense", style: TextStyle(color: Colors.white)), onPressed: addTransaction,padding: EdgeInsets.all(10),splashColor: Colors.pink,color: Colors.blue,),
+                  ]
+                )
+              ),
+            ),
            Container(
-             height: MediaQuery.of(context).size.height * 0.6,
+             height: MediaQuery.of(context).size.height * 0.5,
              child:  ListView(
               scrollDirection: Axis.vertical,
               children: <Widget>[
