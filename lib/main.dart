@@ -110,7 +110,8 @@ class _MyHomePageState extends State<MyHomePage> {
                       ),
                       TextField(
                         decoration: InputDecoration(labelText: "Amount"),
-                        controller: amountController
+                        controller: amountController,
+                        keyboardType: TextInputType.numberWithOptions(decimal: true),
                       ),
                       FlatButton(child: Text("Add Expense", style: TextStyle(color: Colors.white)), onPressed: addTransaction, padding: EdgeInsets.all(10),splashColor: Colors.pink,color: Colors.blue,),
                     ]
