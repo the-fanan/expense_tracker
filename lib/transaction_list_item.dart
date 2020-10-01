@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import './transaction.dart';
 
 class TransactionListItem extends StatelessWidget {
@@ -24,10 +25,10 @@ class TransactionListItem extends StatelessWidget {
                   width: 2,
                 ),
               ),
-              width: MediaQuery.of(context).size.width * 0.3,
+              width: MediaQuery.of(context).size.width * 0.35,
               margin: EdgeInsets.all(10),
               padding: EdgeInsets.all(10),
-              child: Text(this.transaction.amount.toString(), style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.blue),
+              child: Text("₦${this.transaction.amount}", style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.blue),
               ),
             ),
             Container(
@@ -37,7 +38,7 @@ class TransactionListItem extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Text(this.transaction.title, style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold,)),
-                  Text(this.transaction.date.toString(), style: TextStyle(fontSize: 14, color: Colors.grey)),
+                  Text(DateFormat.yMMMMEEEEd().format(this.transaction.date), style: TextStyle(fontSize: 14, color: Colors.grey)),
                 ]
               )
             ),
