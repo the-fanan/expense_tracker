@@ -101,10 +101,19 @@ class _MyHomePageState extends State<MyHomePage> {
             children: <Widget>[
               Container(
                 width: double.infinity,
-                child: Card(
-                  color: Color(0xFFFFC0CB),
-                  child: Text("Chart!"),
-                  elevation: 4,
+                child: Column(
+                  children: <Widget>[
+                    Container(
+                      child: Image.asset("assets/images/dna.jpg", fit: BoxFit.cover),
+                      width: double.infinity,
+                      padding: EdgeInsets.all(10)
+                    ),
+                    Container(
+                      child: Image.network("https://res.cloudinary.com/akiddie/image/upload/v1587135381/zoltan-tasi-482489-unsplash.jpg", fit: BoxFit.contain),
+                      width: double.infinity,
+                      padding: EdgeInsets.all(10)
+                    ),
+                  ]
                 ),
               ),
               Container(
