@@ -67,7 +67,7 @@ class _MyHomePageState extends State<MyHomePage> {
   var amountController = TextEditingController();
 
   void addTransaction() {
-    if (this.titleController.text == null || this.amountController.text == null || this.titleController.text == "" || this.amountController.text == "") {
+    if (this.titleController.text.isEmpty || this.amountController.text.isEmpty || double.parse(this.amountController.text) <= 0) {
       return;
     }
     var newTransaction = Transaction(id: this.transactions.length + 1, title: this.titleController.text, amount: double.parse(this.amountController.text), date: DateTime.now(),);
