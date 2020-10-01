@@ -27,6 +27,7 @@ class MyApp extends StatelessWidget {
         // the app on. For desktop platforms, the controls will be smaller and
         // closer together (more dense) than on mobile platforms.
         visualDensity: VisualDensity.adaptivePlatformDensity,
+        fontFamily: 'Catamaran',
       ),
       home: MyHomePage(title: 'Expense Tracker'),
     );
@@ -87,7 +88,7 @@ class _MyHomePageState extends State<MyHomePage> {
           IconButton(
             icon: Icon(Icons.add),
             onPressed: (){
-              
+
             }
           ),
         ],
