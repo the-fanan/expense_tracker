@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import './transaction.dart';
+import './transaction_list_item.dart';
 
 void main() {
   runApp(MyApp());
@@ -50,7 +52,10 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-
+  final List<Transaction> transactions = [
+    Transaction(id: 1, title: 'The Place', amount: 1520.75, date: DateTime.now(),),
+    Transaction(id: 2, title: 'Bolt', amount: 1250.25, date: DateTime.now(),),
+  ];
   @override
   Widget build(BuildContext context) {
     // This method is rerun every time setState is called, for instance as done
@@ -94,9 +99,15 @@ class _MyHomePageState extends State<MyHomePage> {
                 elevation: 4,
               ),
             ),
-            Card(
-              child: Text("List of Transactions")
-            )
+            Column(
+              children: <Widget>[
+                ...this.transactions.map((tx){
+                  return TransactionListItem(
+                    transaction: tx,
+                  );
+                })
+              ],
+            ),
           ],
         ),
       ),
